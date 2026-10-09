@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#176b45">
+  <meta name="description" content="Apna Dhava — Dhava, Gram Sabha Budhanpur, District Ghazipur ki local news, notices aur events.">
+  <title>Apna Dhava | अपना धावा</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark" aria-hidden="true">अ</div>
+    <div>
+      <p class="eyebrow">गाँव की अपनी आवाज़</p>
+      <h1>Apna Dhava <span>अपना धावा</span></h1>
+      <p class="location">धावा · ग्राम सभा बुधनपुर · जिला गाज़ीपुर, उत्तर प्रदेश</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="pill">हमारा गाँव · हमारी पहचान</p>
+        <h2>अपने गाँव की हर ज़रूरी खबर,<br><em>एक ही जगह।</em></h2>
+        <p>स्थानीय समाचार, सार्वजनिक सूचनाएँ, कार्यक्रम और गाँव की तस्वीरें।</p>
+        <a class="button button-light" href="#send-news">खबर भेजें <span>↗</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div><div class="roof"></div><div class="house"></div>
+        <div class="field field-one"></div><div class="field field-two"></div>
+        <div class="tree"><i></i><b></b></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div><p class="eyebrow">गाँव से जुड़ी बातें</p><h2>क्या देखना चाहते हैं?</h2></div>
+      </div>
+      <div class="quick-grid">
+        <a href="#news" class="quick-card"><span class="quick-icon">📰</span><strong>गाँव की खबर</strong><small>स्थानीय अपडेट</small></a>
+        <a href="#notices" class="quick-card"><span class="quick-icon">📢</span><strong>सूचना बोर्ड</strong><small>ज़रूरी घोषणाएँ</small></a>
+        <a href="#events" class="quick-card"><span class="quick-icon">🎉</span><strong>कार्यक्रम</strong><small>आयोजन और बैठक</small></a>
+        <a href="#send-news" class="quick-card"><span class="quick-icon">✍️</span><strong>खबर भेजें</strong><small>अपनी बात पहुँचाएँ</small></a>
+      </div>
+    </section>
+
+    <section class="section" id="news">
+      <div class="section-heading">
+        <div><p class="eyebrow">ताज़ा अपडेट</p><h2>गाँव की खबरें</h2></div>
+        <span class="section-tag">लोकल न्यूज़</span>
+      </div>
+      <div class="empty-card">
+        <div class="empty-icon">🗞️</div>
+        <h3>पहली खबर का इंतज़ार है</h3>
+        <p>गाँव की सही और उपयोगी खबर भेजें। जाँच के बाद यहाँ प्रकाशित की जा सकती है।</p>
+        <a href="#send-news" class="text-link">खबर भेजें →</a>
+      </div>
+    </section>
+
+    <section class="section" id="notices">
+      <div class="section-heading">
+        <div><p class="eyebrow">सार्वजनिक जानकारी</p><h2>सूचना बोर्ड</h2></div>
+        <span class="section-tag">नोटिस</span>
+      </div>
+      <div class="notice-card">
+        <span class="notice-symbol">📌</span>
+        <div><strong>यहाँ गाँव की सूचनाएँ प्रकाशित होंगी</strong><p>बैठक, सफ़ाई अभियान, बिजली-पानी से जुड़ी जानकारी और अन्य सार्वजनिक घोषणाएँ।</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="events">
+      <div class="section-heading">
+        <div><p class="eyebrow">मिलकर मनाएँ</p><h2>कार्यक्रम और आयोजन</h2></div>
+      </div>
+      <div class="event-card">
+        <div class="event-date"><span>गाँव</span><strong>♥</strong></div>
+        <div><strong>अपने गाँव का अगला कार्यक्रम साझा करें</strong><p>त्योहार, खेलकूद, सांस्कृतिक कार्यक्रम या सार्वजनिक बैठक।</p></div>
+      </div>
+    </section>
+
+    <section class="section send-section" id="send-news">
+      <div class="send-card">
+        <p class="eyebrow">आपकी भागीदारी ज़रूरी है</p>
+        <h2>गाँव की खबर आपके पास है?</h2>
+        <p>खबर का विवरण लिखें। अभी भेजने का विकल्प WhatsApp पर संदेश तैयार करेगा। इसे चालू करने के लिए ऐप के मालिक का WhatsApp नंबर सेट करना होगा।</p>
+        <form id="newsForm">
+          <label for="sender">आपका नाम (ज़रूरी नहीं)</label>
+          <input id="sender" name="sender" maxlength="70" placeholder="अपना नाम लिखें">
+          <label for="category">खबर किस बारे में है?</label>
+          <select id="category" name="category">
+            <option>गाँव की खबर</option>
+            <option>सार्वजनिक सूचना</option>
+            <option>कार्यक्रम / आयोजन</option>
+            <option>सड़क / नाली / सफ़ाई की समस्या</option>
+            <option>अन्य</option>
+          </select>
+          <label for="headline">खबर का शीर्षक *</label>
+          <input id="headline" name="headline" maxlength="120" required placeholder="जैसे: गाँव में सफ़ाई अभियान">
+          <label for="details">पूरी जानकारी *</label>
+          <textarea id="details" name="details" rows="4" required maxlength="1500" placeholder="क्या हुआ, कहाँ हुआ, कब हुआ?"></textarea>
+          <label for="evidence">फोटो/वीडियो</label>
+          <p class="field-note">फोटो या वीडियो WhatsApp खुलने के बाद अलग से अटैच कर सकते हैं।</p>
+          <button class="button button-primary" type="submit">WhatsApp पर खबर भेजें ↗</button>
+          <p id="formMessage" class="form-message" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="community-note">
+      <span>🤝</span><p><strong>जिम्मेदार नागरिक बनें।</strong> खबर भेजने से पहले तथ्य जाँचें। किसी की निजी जानकारी, अफ़वाह या बिना प्रमाण के आरोप साझा न करें।</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-brand">Apna Dhava <span>अपना धावा</span></div>
+    <p>धावा · ग्राम सभा बुधनपुर · जिला गाज़ीपुर, उत्तर प्रदेश</p>
+    <small>यह एक शुरुआती संस्करण है। खबरें अपने-आप सार्वजनिक नहीं होतीं; उन्हें जाँचकर प्रकाशित करना होगा।</small>
+  </footer>
+
+  <nav class="bottom-nav" aria-label="मुख्य नेविगेशन">
+    <a href="#"><span>⌂</span>होम</a><a href="#news"><span>▤</span>खबरें</a><a href="#notices"><span>⚑</span>सूचनाएँ</a><a href="#send-news"><span>＋</span>खबर भेजें</a>
+  </nav>
+  <script src="app.js"></script>
+</body>
+</html>
