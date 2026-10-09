@@ -1,44 +1,29 @@
-// Set this to a dedicated public WhatsApp number in international format without + or spaces.
-const ADMIN_WHATSAPP_NUMBER = "REPLACE_WITH_WHATSAPP_NUMBER";
-
-const form = document.getElementById("newsForm");
-const message = document.getElementById("formMessage");
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  const sender = document.getElementById("sender").value.trim() || "नाम नहीं दिया";
-  const category = document.getElementById("category").value;
-  const headline = document.getElementById("headline").value.trim();
-  const details = document.getElementById("details").value.trim();
-
-  if (!headline || !details) {
-    message.textContent = "कृपया शीर्षक और पूरी जानकारी भरें।";
-    return;
-  }
-
-  const text = [
-    "नमस्ते! Apna Dhava के लिए खबर भेज रहा/रही हूँ।",
-    "",
-    "नाम: " + sender,
-    "श्रेणी: " + category,
-    "शीर्षक: " + headline,
-    "विवरण: " + details,
-    "",
-    "कृपया जाँच के बाद ही प्रकाशित करें।"
-  ].join("\\n");
-
-  if (ADMIN_WHATSAPP_NUMBER === "REPLACE_WITH_WHATSAPP_NUMBER") {
-    message.textContent = "डेमो अभी तैयार है। खबर भेजने का बटन चालू करने के लिए app.js में अपना सार्वजनिक WhatsApp नंबर सेट करना होगा।";
-    return;
-  }
-
-  const url = "https://wa.me/" + ADMIN_WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
-  window.open(url, "_blank", "noopener,noreferrer");
-  message.textContent = "WhatsApp खुल रहा है। भेजने से पहले विवरण जाँच लें; फोटो/वीडियो वहाँ जोड़ सकते हैं।";
-});
-
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+async function setupShareForm(formId, messageId, fields, photoId) {
+  const form = document.getElementById(formId), status = document.getElementById(messageId);
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const lines = ["Apna Dhava — धावा, ग्राम सभा बुढ़नपुर, जिला गाज़ीपुर", ""];
+    for (const [label, id] of fields) {
+      const el = document.getElementById(id);
+      lines.push(label + ": " + ((el.value || "").trim() || "नहीं दिया"));
+    }
+    lines.push("", "कृपया जाँचकर ही प्रकाशित/आगे भेजें।");
+    const text = lines.join("\\n"), file = document.getElementById(photoId).files[0];
+    try {
+      if (navigator.share) {
+        const payload = {title: "Apna Dhava", text};
+        if (file && navigator.canShare && navigator.canShare({files:[file]})) payload.files = [file];
+        await navigator.share(payload);
+        status.textContent = "Share menu खुल गया। WhatsApp चुनकर admin को भेजें। अगर फोटो साथ न जाए, तो WhatsApp में अलग से जोड़ें।";
+      } else {
+        window.prompt("इस संदेश को copy करके WhatsApp पर भेजें:", text);
+        status.textContent = "संदेश copy करके WhatsApp पर भेजें। फोटो अलग से attach करें।";
+      }
+    } catch (err) {
+      if (err.name !== "AbortError") status.textContent = "Share नहीं हो पाया। कृपया WhatsApp पर manually भेजें।";
+    }
   });
 }
+setupShareForm("newsForm","newsMessage",[["नाम","newsSender"],["श्रेणी","newsCategory"],["शीर्षक","newsHeadline"],["विवरण","newsDetails"]],"newsPhoto");
+setupShareForm("complaintForm","complaintMessage",[["नाम","complaintSender"],["समस्या","complaintType"],["जगह","complaintPlace"],["विवरण","complaintDetails"]],"complaintPhoto");
+if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));

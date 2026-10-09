@@ -1,13 +1,1 @@
-{
-  "name": "Apna Dhava - अपना धावा",
-  "short_name": "Apna Dhava",
-  "description": "Dhava, Gram Sabha Budhanpur, Ghazipur ki local news aur notices.",
-  "start_url": "./index.html",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#fbfaf5",
-  "theme_color": "#176b45",
-  "icons": [
-    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
-  ]
-}
+{"name":"Apna Dhava - अपना धावा","short_name":"Apna Dhava","description":"धावा, ग्राम सभा बुढ़नपुर, जिला गाज़ीपुर की खबरें और जनसमस्याएँ।","start_url":"./index.html","scope":"./","display":"standalone","background_color":"#fbfaf5","theme_color":"#176b45","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}

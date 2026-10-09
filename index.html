@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#176b45">
   <meta name="description" content="Apna Dhava — Dhava, Gram Sabha Budhanpur, District Ghazipur ki local news, notices aur events.">
-  <title>Apna Dhava | अपना धावाॅ</title>
+  <title>Apna Dhava | अपना धावा</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
@@ -15,7 +15,7 @@
     <div class="brand-mark" aria-hidden="true">अ</div>
     <div>
       <p class="eyebrow">गाँव की अपनी आवाज़</p>
-      <h1>Apna Dhava <span>अपना धावाॅ</span></h1>
+      <h1>Apna Dhava <span>अपना धावा</span></h1>
       <p class="location">धावा · ग्राम सभा बुढ़नपुर · जिला गाज़ीपुर, उत्तर प्रदेश</p>
     </div>
   </header>
@@ -41,7 +41,7 @@
       </div>
       <div class="quick-grid">
         <a href="#news" class="quick-card"><span class="quick-icon">📰</span><strong>गाँव की खबर</strong><small>स्थानीय अपडेट</small></a>
-        <a href="#notices" class="quick-card"><span class="quick-icon">📢</span><strong>सूचना बोर्ड</strong><small>ज़रूरी घोषणाएँ</small></a>
+        <a href="#notices" class="quick-card"><span class="quick-icon">📢</span><strong>सूचना बोर्ड</strong><small>ज़रूरी घोषणाएँ</small></a><a href="#complaints" class="quick-card"><span class="quick-icon">🛠️</span><strong>समस्या बताएँ</strong><small>सड़क, नाली, सफ़ाई</small></a>
         <a href="#events" class="quick-card"><span class="quick-icon">🎉</span><strong>कार्यक्रम</strong><small>आयोजन और बैठक</small></a>
         <a href="#send-news" class="quick-card"><span class="quick-icon">✍️</span><strong>खबर भेजें</strong><small>अपनी बात पहुँचाएँ</small></a>
       </div>
@@ -83,32 +83,32 @@
 
     <section class="section send-section" id="send-news">
       <div class="send-card">
-        <p class="eyebrow">आपकी भागीदारी ज़रूरी है</p>
-        <h2>गाँव की खबर आपके पास है?</h2>
-        <p>खबर का विवरण लिखें। अभी भेजने का विकल्प WhatsApp पर संदेश तैयार करेगा। इसे चालू करने के लिए ऐप के मालिक का WhatsApp नंबर सेट करना होगा।</p>
+        <p class="eyebrow">आपकी भागीदारी ज़रूरी है</p><h2>गाँव की खबर भेजें</h2>
+        <p>जानकारी भरें और बटन दबाएँ। Share menu में WhatsApp चुनकर Apna Dhava admin को भेजें। खबर अपने-आप वेबसाइट पर प्रकाशित नहीं होगी।</p>
         <form id="newsForm">
-          <label for="sender">आपका नाम (ज़रूरी नहीं)</label>
-          <input id="sender" name="sender" maxlength="70" placeholder="अपना नाम लिखें">
-          <label for="category">खबर किस बारे में है?</label>
-          <select id="category" name="category">
-            <option>गाँव की खबर</option>
-            <option>सार्वजनिक सूचना</option>
-            <option>कार्यक्रम / आयोजन</option>
-            <option>सड़क / नाली / सफ़ाई की समस्या</option>
-            <option>अन्य</option>
-          </select>
-          <label for="headline">खबर का शीर्षक *</label>
-          <input id="headline" name="headline" maxlength="120" required placeholder="जैसे: गाँव में सफ़ाई अभियान">
-          <label for="details">पूरी जानकारी *</label>
-          <textarea id="details" name="details" rows="4" required maxlength="1500" placeholder="क्या हुआ, कहाँ हुआ, कब हुआ?"></textarea>
-          <label for="evidence">फोटो/वीडियो</label>
-          <p class="field-note">फोटो या वीडियो WhatsApp खुलने के बाद अलग से अटैच कर सकते हैं।</p>
-          <button class="button button-primary" type="submit">WhatsApp पर खबर भेजें ↗</button>
-          <p id="formMessage" class="form-message" role="status"></p>
+          <label for="newsSender">आपका नाम (वैकल्पिक)</label><input id="newsSender" maxlength="70" placeholder="अपना नाम लिखें">
+          <label for="newsCategory">खबर किस बारे में है?</label><select id="newsCategory"><option>गाँव की खबर</option><option>सार्वजनिक सूचना</option><option>कार्यक्रम / आयोजन</option><option>अन्य</option></select>
+          <label for="newsHeadline">खबर का शीर्षक *</label><input id="newsHeadline" maxlength="120" required placeholder="जैसे: गाँव में सफ़ाई अभियान">
+          <label for="newsDetails">पूरी जानकारी *</label><textarea id="newsDetails" rows="4" required maxlength="1500" placeholder="क्या हुआ, कहाँ हुआ, कब हुआ?"></textarea>
+          <label for="newsPhoto">फोटो (वैकल्पिक)</label><input id="newsPhoto" type="file" accept="image/*">
+          <button class="button button-primary" type="submit">खबर शेयर करें ↗</button><p id="newsMessage" class="form-message" role="status"></p>
         </form>
       </div>
     </section>
-
+    <section class="section" id="complaints">
+      <div class="send-card">
+        <p class="eyebrow">गाँव को बेहतर बनाएँ</p><h2>जनसमस्या / शिकायत भेजें</h2>
+        <p>सड़क, नाली, सफ़ाई, पानी या स्ट्रीट लाइट की समस्या भेजें। यह सरकारी शिकायत पोर्टल नहीं है; यह स्थानीय admin तक जानकारी पहुँचाने का तरीका है।</p>
+        <form id="complaintForm">
+          <label for="complaintSender">आपका नाम (वैकल्पिक)</label><input id="complaintSender" maxlength="70" placeholder="अपना नाम">
+          <label for="complaintType">समस्या किस बारे में है?</label><select id="complaintType"><option>सड़क</option><option>नाली / जल निकासी</option><option>सफ़ाई / कूड़ा</option><option>पानी</option><option>स्ट्रीट लाइट / बिजली</option><option>सार्वजनिक स्थान</option><option>अन्य</option></select>
+          <label for="complaintPlace">समस्या की जगह *</label><input id="complaintPlace" maxlength="160" required placeholder="मोहल्ला / सड़क / पहचान">
+          <label for="complaintDetails">समस्या का विवरण *</label><textarea id="complaintDetails" rows="4" required maxlength="1500" placeholder="समस्या कब से है और क्या दिक्कत हो रही है?"></textarea>
+          <label for="complaintPhoto">फोटो (वैकल्पिक)</label><input id="complaintPhoto" type="file" accept="image/*">
+          <button class="button button-primary" type="submit">समस्या शेयर करें ↗</button><p id="complaintMessage" class="form-message" role="status"></p>
+        </form>
+      </div>
+    </section>
     <section class="community-note">
       <span>🤝</span><p><strong>जिम्मेदार नागरिक बनें।</strong> खबर भेजने से पहले तथ्य जाँचें। किसी की निजी जानकारी, अफ़वाह या बिना प्रमाण के आरोप साझा न करें।</p>
     </section>
@@ -116,12 +116,12 @@
 
   <footer>
     <div class="footer-brand">Apna Dhava <span>अपना धावा</span></div>
-    <p>धावा · ग्राम सभा बुधनपुर · जिला गाज़ीपुर, उत्तर प्रदेश</p>
+    <p>धावा · ग्राम सभा बुढ़नपुर · जिला गाज़ीपुर, उत्तर प्रदेश</p>
     <small>यह एक शुरुआती संस्करण है। खबरें अपने-आप सार्वजनिक नहीं होतीं; उन्हें जाँचकर प्रकाशित करना होगा।</small>
   </footer>
 
   <nav class="bottom-nav" aria-label="मुख्य नेविगेशन">
-    <a href="#"><span>⌂</span>होम</a><a href="#news"><span>▤</span>खबरें</a><a href="#notices"><span>⚑</span>सूचनाएँ</a><a href="#send-news"><span>＋</span>खबर भेजें</a>
+    <a href="#"><span>⌂</span>होम</a><a href="#news"><span>▤</span>खबरें</a><a href="#notices"><span>⚑</span>सूचनाएँ</a><a href="#complaints"><span>⚑</span>समस्या</a><a href="#send-news"><span>＋</span>खबर भेजें</a>
   </nav>
   <script src="app.js"></script>
 </body>
