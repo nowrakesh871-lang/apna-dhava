@@ -1,29 +1,78 @@
-async function setupShareForm(formId, messageId, fields, photoId) {
-  const form = document.getElementById(formId), status = document.getElementById(messageId);
+/*
+ * Apna Dhava — Firebase Firestore submission handler
+ * IMPORTANT: replace the 3 placeholder values below using your Firebase Config.
+ * This first version saves text only; selected photos are not uploaded.
+ */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB6LRSz_XtxZTWoFxEnc61V-9A_lhDQNOQ",
+  authDomain: "apna-dhava.firebaseapp.com",
+  projectId: "apna-dhava",
+  storageBucket: "apna-dhava.firebasestorage.app",
+  messagingSenderId: "1006904979424",
+  appId: "1:1006904979424:web:b1db3475cdcda90aa30585"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const valueOf = (id) => (document.getElementById(id)?.value || "").trim();
+
+async function setupSubmission(formId, statusId, type) {
+  const form = document.getElementById(formId);
+  const status = document.getElementById(statusId);
+  if (!form || !status) return;
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    const lines = ["Apna Dhava — धावा, ग्राम सभा बुढ़नपुर, जिला गाज़ीपुर", ""];
-    for (const [label, id] of fields) {
-      const el = document.getElementById(id);
-      lines.push(label + ": " + ((el.value || "").trim() || "नहीं दिया"));
-    }
-    lines.push("", "कृपया जाँचकर ही प्रकाशित/आगे भेजें।");
-    const text = lines.join("\\n"), file = document.getElementById(photoId).files[0];
+    const button = form.querySelector('button[type="submit"]');
+    if (button) button.disabled = true;
+    status.textContent = "आपकी जानकारी जमा हो रही है…";
+
     try {
-      if (navigator.share) {
-        const payload = {title: "Apna Dhava", text};
-        if (file && navigator.canShare && navigator.canShare({files:[file]})) payload.files = [file];
-        await navigator.share(payload);
-        status.textContent = "Share menu खुल गया। WhatsApp चुनकर admin को भेजें। अगर फोटो साथ न जाए, तो WhatsApp में अलग से जोड़ें।";
+      let data;
+      if (type === "news") {
+        data = {
+          type: "news",
+          senderName: valueOf("newsSender").slice(0, 70),
+          category: valueOf("newsCategory").slice(0, 80),
+          headline: valueOf("newsHeadline").slice(0, 120),
+          details: valueOf("newsDetails").slice(0, 1500),
+          status: "pending",
+          createdAt: serverTimestamp()
+        };
       } else {
-        window.prompt("इस संदेश को copy करके WhatsApp पर भेजें:", text);
-        status.textContent = "संदेश copy करके WhatsApp पर भेजें। फोटो अलग से attach करें।";
+        data = {
+          type: "complaint",
+          senderName: valueOf("complaintSender").slice(0, 70),
+          category: valueOf("complaintType").slice(0, 80),
+          place: valueOf("complaintPlace").slice(0, 160),
+          details: valueOf("complaintDetails").slice(0, 1500),
+          status: "pending",
+          createdAt: serverTimestamp()
+        };
       }
-    } catch (err) {
-      if (err.name !== "AbortError") status.textContent = "Share नहीं हो पाया। कृपया WhatsApp पर manually भेजें।";
+
+      await addDoc(collection(db, "submissions"), data);
+      form.reset();
+      status.textContent = "आपकी जानकारी ऐप में जमा हो गई है। एडमिन जाँच के बाद आगे कार्रवाई करेगा।";
+    } catch (error) {
+      console.error("Apna Dhava submission error:", error);
+      status.textContent = "जमा नहीं हो पाया। Config और Firestore Rules की जाँच करनी होगी।";
+    } finally {
+      if (button) button.disabled = false;
     }
   });
 }
-setupShareForm("newsForm","newsMessage",[["नाम","newsSender"],["श्रेणी","newsCategory"],["शीर्षक","newsHeadline"],["विवरण","newsDetails"]],"newsPhoto");
-setupShareForm("complaintForm","complaintMessage",[["नाम","complaintSender"],["समस्या","complaintType"],["जगह","complaintPlace"],["विवरण","complaintDetails"]],"complaintPhoto");
-if ("serviceWorker" in navigator) window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
+
+setupSubmission("newsForm", "newsMessage", "news");
+setupSubmission("complaintForm", "complaintMessage", "complaint");
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+  });
+}
